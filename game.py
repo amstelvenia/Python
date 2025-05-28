@@ -15,6 +15,21 @@ paddle.shapesize(stretch_wid=6, stretch_len=1)
 paddle.penup()
 paddle.goto(-350,0)
 
-wn.update()
+def paddle_up():
+    y = paddle.ycor()
+    if y > -250:
+        y += 20
+        paddle.sety(y)
 
-input("Press any key to continue...") # tijdelijke toevoeging t.b.v. testen
+def paddle_down():
+    y = paddle.ycor()
+    if y > -240:
+        y -= 20
+        paddle.sety(y)
+
+# Toetsenbordbinding
+wn.listen()
+wn.onkeypress(paddle_up, "w")
+wn.onkeypress(paddle_down, "s")
+while True:
+    wn.update()
