@@ -47,3 +47,11 @@ while True:
     # Beweeg de bal
     ball.setx(ball.xcor() + ball.dx)
     ball.sety(ball.ycor() + ball.dy)
+
+        # detecteer randen van het scherm
+    if (ball.xcor() > 300 or ball.xcor() < -300 ):
+       ball.dx *= 1
+    if (ball.ycor() > 300 or ball.ycor() < -300 ):
+       ball.dy *= -1
+    if (ball.xcor() > 300 ):
+       ball.dx *= -1
