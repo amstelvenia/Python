@@ -1,0 +1,1 @@
+De bal verdwijnt uit het scherm omdat er geen if statement is die de minimum en maximum hoogte van de het scherm waar de bal kan komen bepaald zoals die van de paddle in de code.

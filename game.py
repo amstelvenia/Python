@@ -17,7 +17,7 @@ paddle.goto(-350,0)
 
 def paddle_up():
     y = paddle.ycor()
-    if y > -250:
+    if y < 250:
         y += 20
         paddle.sety(y)
 
@@ -27,9 +27,23 @@ def paddle_down():
         y -= 20
         paddle.sety(y)
 
+# Bal
+ball = turtle.Turtle()
+ball.shape("square")
+ball.color("white")
+ball.penup()
+ball.goto(0, 0)
+ball.dx = 0.1
+ball.dy = -0.1
+
 # Toetsenbordbinding
 wn.listen()
 wn.onkeypress(paddle_up, "w")
 wn.onkeypress(paddle_down, "s")
+
 while True:
     wn.update()
+
+    # Beweeg de bal
+    ball.setx(ball.xcor() + ball.dx)
+    ball.sety(ball.ycor() + ball.dy)
