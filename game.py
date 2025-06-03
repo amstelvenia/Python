@@ -44,6 +44,9 @@ wn.onkeypress(paddle_down, "s")
 while True:
     wn.update()
 
+    # Score variabele
+    score = 0
+
     # Beweeg de bal
     ball.setx(ball.xcor() + ball.dx)
     ball.sety(ball.ycor() + ball.dy)
@@ -55,3 +58,14 @@ while True:
        ball.dy *= -1
     if (ball.xcor() > 300 ):
        ball.dx *= -1
+
+    # Detecteer botsing met paddle
+    if (ball.dx < 0 and ball.xcor() < -350): # ball beweegt naar links en zit bij de linker zijkant.
+        if (paddle.ycor() - 60 < ball.ycor() < paddle.ycor() + 60): # bal 'raakt' de bal
+            ball.dx *= -1 # beweeg de bal de andere kant uit (horizontaal)
+            ball.dy *= -1 # beweeg de bal de andere kant uit (verticaal)
+        else:
+            ball.dx = 0 
+            ball.dy = 0
+            score = score + 1
+            print(score)
