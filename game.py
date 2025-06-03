@@ -27,6 +27,22 @@ def paddle_down():
         y -= 20
         paddle.sety(y)
 
+# Score variabele
+score = 0
+
+# Pen om de score weer te geven
+pen = turtle.Turtle()
+pen.speed(0)
+pen.color("white")
+pen.penup()
+pen.hideturtle()
+pen.goto(0, 260)
+pen.write("Score: 0", align="center", font=("Courier", 24, "normal"))
+
+def update_score():
+    pen.clear()
+    pen.write("Score: {}".format(score), align="center", font=("Courier", 24, "normal"))
+
 # Bal
 ball = turtle.Turtle()
 ball.shape("square")
@@ -43,6 +59,10 @@ wn.onkeypress(paddle_down, "s")
 
 while True:
     wn.update()
+
+    def update_score():
+        pen.clear()
+        pen.write("Score: {}".format(score), align="center", font=("Courier", 24, "normal"))
 
     # Score variabele
     score = 0
@@ -67,5 +87,5 @@ while True:
         else:
             ball.dx = 0 
             ball.dy = 0
-            score = score + 1
-            print(score)
+            score += 1
+            update_score()
