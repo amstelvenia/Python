@@ -1,4 +1,5 @@
 import turtle
+import time  # Import the time module
 
 # Venster instellen
 wn = turtle.Screen()
@@ -13,7 +14,7 @@ paddle.shape("square")
 paddle.color("white")
 paddle.shapesize(stretch_wid=6, stretch_len=1)
 paddle.penup()
-paddle.goto(-350,0)
+paddle.goto(-350, 0)
 
 def paddle_up():
     y = paddle.ycor()
@@ -37,11 +38,16 @@ pen.color("white")
 pen.penup()
 pen.hideturtle()
 pen.goto(0, 260)
-pen.write("Score: 0", align="center", font=("Courier", 24, "normal"))
+pen.write("Score: 0", align="right", font=("Courier", 24, "normal"))
+pen.write("Levens: 3", align="left", font=("Courier", 24, "normal"))
 
 def update_score():
     pen.clear()
-    pen.write("Score: {}".format(score), align="center", font=("Courier", 24, "normal"))
+    pen.write("Score: {} Levens: {}".format(score, lifes), align="center", font=("Courier", 24, "normal"))
+
+def game_over():
+    pen.goto(0, 0)
+    pen.write("Game Over", align="center", font=("Courier", 36, "normal"))
 
 # Bal
 ball = turtle.Turtle()
@@ -60,32 +66,31 @@ wn.onkeypress(paddle_down, "s")
 while True:
     wn.update()
 
-    def update_score():
-        pen.clear()
-        pen.write("Score: {}".format(score), align="center", font=("Courier", 24, "normal"))
-
     # Score variabele
     score = 0
+    lifes = 3
 
     # Beweeg de bal
     ball.setx(ball.xcor() + ball.dx)
     ball.sety(ball.ycor() + ball.dy)
 
-        # detecteer randen van het scherm
-    if (ball.xcor() > 300 or ball.xcor() < -300 ):
-       ball.dx *= 1
-    if (ball.ycor() > 300 or ball.ycor() < -300 ):
-       ball.dy *= -1
-    if (ball.xcor() > 300 ):
-       ball.dx *= -1
+    # Detecteer randen van het scherm
+    if ball.xcor() > 300 or ball.xcor() < -300:
+        ball.dx *= 1
+    if ball.ycor() > 300 or ball.ycor() < -300:
+        ball.dy *= -1
+    if ball.xcor() > 300:
+        ball.dx *= -1
 
     # Detecteer botsing met paddle
-    if (ball.dx < 0 and ball.xcor() < -350): # ball beweegt naar links en zit bij de linker zijkant.
-        if (paddle.ycor() - 60 < ball.ycor() < paddle.ycor() + 60): # bal 'raakt' de bal
-            ball.dx *= -1 # beweeg de bal de andere kant uit (horizontaal)
-            ball.dy *= -1 # beweeg de bal de andere kant uit (verticaal)
+    if ball.dx < 0 and ball.xcor() < -350:  # ball beweegt naar links en zit bij de linker zijkant.
+        if paddle.ycor() - 60 < ball.ycor() < paddle.ycor() + 60:  # bal 'raakt' de bal
+            ball.dx *= -1  # beweeg de bal de andere kant uit (horizontaal)
+            ball.dy *= -1  # beweeg de bal de andere kant uit (verticaal)
         else:
-            ball.dx = 0 
+            ball.dx = 0
             ball.dy = 0
             score += 1
+            lifes -= 1
             update_score()
+            time.sleep(3)  # Pause the game for 3 seconds when a score is made
