@@ -1,3 +1,7 @@
+#Snelheid verhogen
+#Bij elke 5 punten erbij versnelt de bal en wordt hij rood en rond. Dit heb ik gedaan door een nieuwe functie die de snelheid van de bal verhoogd na elke 5 punten.
+#Het spel eindigt wanneer al je levens op zijn en dan krijg je een game over scherm
+
 import turtle
 import time  # Import the time module
 
